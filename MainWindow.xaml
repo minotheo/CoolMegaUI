@@ -1,0 +1,164 @@
+﻿<Window x:Class="CoolMegaUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:uc="clr-namespace:CoolMegaUI.UserControls"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        AllowsTransparency="True"
+        WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" 
+        Background="Transparent" Height="760" Width="1280" >
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </Window.Resources>
+
+    <Border CornerRadius="25" Background="#151f2d"
+            MouseDown="Border_MouseDown" Name="AppLayout">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Left -->
+            <Border Name="SideBarLayout" Grid.RowSpan="3" Background="#1e2e44" CornerRadius=" 25 0 0 25">
+                <Grid>
+                    <StackPanel VerticalAlignment="Top">
+                        <!-- Ellipses -->
+                        <StackPanel Orientation="Horizontal" 
+                                    Margin="0 30 0 40"
+                                    HorizontalAlignment="Center">
+                            <Ellipse Width="12" Height="12" Fill="#eb1700"
+                                     Name="Close"
+                                     MouseDown="Close_OnMouseDown"/>
+                            <Ellipse Width="12" Height="12" Fill="#ffaf01"
+                                     Name="Minimize"
+                                     MouseDown="Minimize_OnMouseDown"
+                                     Margin="7 0"/>
+                            <Ellipse Width="12" Height="12" Fill="#009d00"
+                                     Name="Maximize"
+                                     MouseDown="Maximize_OnMouseDown"
+                                     />
+                        </StackPanel>
+
+                        <!-- Menu buttons -->
+
+                        <uc:MenuButton Icon="HomeVariant" IsActive="True"/>
+                        <uc:MenuButton Icon="Finance"/>
+                        <uc:MenuButton Icon="CommentMultipleOutline"/>
+                        <uc:MenuButton Icon="AccountSearchOutline"/>
+                        <uc:MenuButton Icon="BookSyncOutline"/>
+                        <uc:MenuButton Icon="AlertCircleCheckOutline"/>
+                        <uc:MenuButton Icon="CogOutline"/>
+                    </StackPanel>
+
+                    <uc:MenuButton 
+                        Icon="Power" 
+                        VerticalAlignment="Bottom" 
+                        Margin="0 0 0 15"
+                        />
+                </Grid>
+            </Border>
+
+            <!-- Top menu -->
+            <Grid Grid.Row="0" Grid.Column="1" Margin="30">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Search Textbox -->
+                <Grid>
+                    <TextBlock 
+                        Margin="40 0 15 0"
+                        VerticalAlignment="Center"
+                        Foreground="#9ea4ad"
+                        Panel.ZIndex="1"
+                        IsHitTestVisible="False"
+                        Text="Search here"
+                        Visibility=
+                        "{Binding ElementName=textBox, Path=Text.IsEmpty,
+                        Converter={StaticResource BoolToVis}}"
+                               />
+
+                    <TextBox x:Name="textBox" 
+                             Style="{StaticResource searchTextBox}"/>
+
+                    <iconPacks:PackIconMaterial 
+                        Kind="Magnify" 
+                        Width="15"
+                        Height="15"
+                        Margin="15 0 0 0"
+                        Foreground="#9ea4ad"
+                        VerticalAlignment="Center"
+                    />
+                </Grid>
+
+                <!-- Buttons -->
+                <StackPanel Grid.Row="0"
+                            Grid.Column="1"
+                            Margin="20 0 0 0"
+                            Orientation="Horizontal"
+                >
+                    <Button Style="{StaticResource topMenuButton}">
+                        <iconPacks:PackIconMaterial 
+                            Kind="Bell" Style="{StaticResource topMenuButtonIcon}"/>
+                    </Button>
+                    <Button Style="{StaticResource topMenuButton}">
+                        <iconPacks:PackIconMaterial 
+                            Kind="Bookmark" Style="{StaticResource topMenuButtonIcon}"/>
+                    </Button>
+                    <Button Style="{StaticResource topMenuButton}">
+                        <iconPacks:PackIconMaterial 
+                            Kind="Account" Style="{StaticResource topMenuButtonIcon}"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+
+            <!-- Middle top section -->
+            <Grid Grid.Row="1" Grid.Column="1" Margin="20 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Info cards Left -->
+                <StackPanel Margin="10 0">
+                    <uc:InfoCard Number="18" 
+                                 Title="Average Days to Hire" 
+                                 IsTechnical="True"
+                                 IsActive="True"/>
+                    <uc:InfoCard Number="54" 
+                                 Title="Average Days to Fill" 
+                                 IsTechnical="True"/>
+                    <uc:InfoCard Number="98" 
+                                 Title="Offer Acceptance Rate" 
+                                 IsTechnical="True"/>
+                </StackPanel>
+
+                <!-- Info cards Right -->
+
+                <StackPanel Grid.Column="1" Margin="10 0">
+                    <uc:InfoCard Number="23" 
+                                 Title="Average Days to Hire" 
+                                 IsTechnical="False"/>
+                    <uc:InfoCard Number="27" 
+                                 Title="Average Days to Fill" 
+                                 IsTechnical="False"/>
+                    <uc:InfoCard Number="99" 
+                                 Title="Offer Acceptance Rate" 
+                                 IsTechnical="False"/>
+                </StackPanel>
+
+                <!-- Cost section -->
+            </Grid>
+
+        </Grid>
+    </Border>
+</Window>
